@@ -1,12 +1,14 @@
 package main
 
 import "fmt"
+import "log"
 
 func main() {
 	em := Employee{"Emily", 26, female}
 	fmt.Println("Name: " , em.name, em.age, em.getSex())
 
 	bum := Business{"Emily's Business", nil}
+
 	fmt.Println(bum.getName())
 }
 
