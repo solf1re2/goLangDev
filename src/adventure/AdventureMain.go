@@ -5,11 +5,12 @@ import "log"
 
 func main() {
 	fmt.Println("Hello")
-	fmt.Println(promptAndGetInput())
+	fmt.Println(promptAndGetInputString())
+	fmt.Println(promptAndGetInputInt())
 }
 
 
-func promptAndGetInput() string {
+func promptAndGetInputString() string {
 	var i string
 	_, err := fmt.Scanf("%s", &i)
 	if err != nil {
@@ -19,3 +20,12 @@ func promptAndGetInput() string {
 	return i
 }
 
+func promptAndGetInputInt() int {
+	var i int
+	_, err := fmt.Scanf("%d", &i)
+	if err != nil {
+		log.Print("  Input Error ", err)
+		i = ""
+	}
+	return i
+}
