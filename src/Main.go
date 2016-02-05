@@ -1,12 +1,23 @@
 package main
 
 import "fmt"
+import "log"
 
 func main() {
 	em := Employee{"Emily", 26, female}
 	fmt.Println("Name: " , em.name, em.age, em.getSex())
 
 	bum := Business{"Emily's Business", nil}
+
+
+	var i int
+	_, err := fmt.Scanf("%d", &i)
+	if err != nil {
+		log.Print("  Scan for i failed, due to ", err)
+	} else {
+		fmt.Println("you Input", i)
+	}
+
 	fmt.Println(bum.getName())
 }
 
