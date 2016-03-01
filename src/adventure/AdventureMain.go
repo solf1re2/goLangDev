@@ -6,7 +6,7 @@ import "log"
 func main() {
 	fmt.Println("Hello")
 	fmt.Println(promptAndGetInputString())
-	fmt.Println(promptAndGetInputInt())
+//	fmt.Println(promptAndGetInputInt())
 }
 
 
@@ -25,7 +25,7 @@ func promptAndGetInputInt() int {
 	_, err := fmt.Scanf("%d", &i)
 	if err != nil {
 		log.Print("  Input Error ", err)
-		i = ""
+		i = 0
 	}
 	return i
 }
