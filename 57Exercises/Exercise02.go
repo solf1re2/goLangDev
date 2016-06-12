@@ -6,13 +6,13 @@ import (
 )
 func main() {
 	var i = ""
-	fmt.Print("Hello, what is your name?")
-	i = getInput()
+	fmt.Print("Hello, what is your name? ")
+	i = getInput2()
 
 	fmt.Println(i,"has" , len(i) , "characters")
 }
 
-func getInput() string {
+func getInput2() string {
 	var i string
 	_, err := fmt.Scanf("%s", &i)
 
@@ -22,7 +22,7 @@ func getInput() string {
 	}
 	if len(i) == 0 {
 		fmt.Println("You must enter a name.")
-		return getInput()
+		return getInput2()
 	}
 	return i
 }

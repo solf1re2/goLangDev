@@ -7,7 +7,7 @@ import (
 
 func main() {
 	var i = ""
-	fmt.Print("Hello, what is your name?")
+	fmt.Print("Hello, what is your name? ")
 	i = getInput()
 
 	fmt.Println("Hello" , i , "nice to meet you")
