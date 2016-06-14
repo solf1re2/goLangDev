@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/goLangDev.iml" filepath="$PROJECT_DIR$/.idea/goLangDev.iml" />
+      <module fileurl="file://$PROJECT_DIR$/57Exercises/57Exercises.iml" filepath="$PROJECT_DIR$/57Exercises/57Exercises.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Euler/Euler.iml" filepath="$PROJECT_DIR$/Euler/Euler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/adventure/adventure.iml" filepath="$PROJECT_DIR$/adventure/adventure.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gopl/gopl.iml" filepath="$PROJECT_DIR$/gopl/gopl.iml" />
     </modules>
   </component>
 </project>
