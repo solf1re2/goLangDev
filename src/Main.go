@@ -1,7 +1,7 @@
 package main
 
 import "fmt"
-import "log"
+//import "log"
 
 func main() {
 	em := Employee{"Emily", 26, female}
