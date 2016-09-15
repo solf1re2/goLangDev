@@ -1,4 +1,4 @@
-package main
+package texthandling
 
 import (
 	"bufio"
@@ -12,7 +12,7 @@ Function called with input string used to prompt user for a single line input.
 @promptMessage message to prompt user for input.
 @returns user input
 */
-func promptAndReturnInputFromUser(promptMessage string) string {
+func PromptAndRetrunInputFromUser(promptMessage string) string {
 	var i string
 	scanner := bufio.NewScanner(os.Stdin)
 	fmt.Println(promptMessage)
@@ -34,9 +34,24 @@ func promptAndReturnInputFromUser(promptMessage string) string {
 	return i
 }
 
-//func open_file_return_contents_string(fileLocation string) string {
-//	//file,_ := os.Open(fileLocation)
-//	//var s string;
-//	//file.WriteString("hellow")
-//	//return s
-//}
+// PromptAndGetInputString - returns i - user input string
+func PromptAndGetInputString() string {
+	var i string
+	_, err := fmt.Scanf("%s", &i)
+	if err != nil {
+		log.Print("  Input Error ", err)
+		i = ""
+	}
+	return i
+}
+
+//PromptAndGetInputInt - returns i- user input int
+func PromptAndGetInputInt() int {
+	var i int
+	_, err := fmt.Scanf("%d", &i)
+	if err != nil {
+		log.Print("  Input Error ", err)
+		i = 0
+	}
+	return i
+}

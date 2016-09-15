@@ -1,4 +1,4 @@
-package solEuler
+package main
 
 import "fmt"
 
