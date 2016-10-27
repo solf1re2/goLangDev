@@ -6,64 +6,21 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"strconv"
 
 	"github.com/solf1re2/goLangDev/gopl/ch1"
 )
 
 func main() {
-	// prepareChapterList()
 	chapter := selectChapter()
 	program := selectProgramme(chapter)
 	callFunc(program)
-	// ch1.Echo1()
-	// ch1.Echo2()
-	// ch1.Helloworld()
-	// init()
-}
-
-func prepareChapterList() {
-
-	var chapterList []string
-	// prepare list options
-	files, err := ioutil.ReadDir(".")
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	for _, file := range files {
-		// fmt.Println(file.Name())
-		f, err := os.Open(file.Name())
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-		fi, err := f.Stat()
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-		switch mode := fi.Mode(); {
-		case mode.IsDir():
-			// this is a chapter/package, add to the list.
-			// fmt.Println("directory")
-			chapterList = append(chapterList, file.Name())
-		case mode.IsRegular():
-			// do file stuff - ignore
-			// fmt.Println("file")
-		}
-	}
-	// fmt.Println(chapterList)
-	// fmt.Println("preparing chapter list")
-	log.Println("preparing chapter list")
 }
 
 func selectChapter() string {
 	//Output a list of "chapters" or "packages" for the user to choose from
 	//TODO Hard code for now --> map in file or scan directories under gopl in future?
 	fmt.Println("Select chapter (enter 1,2,etc)")
-	// for _, chapter := range chapterList {
-	// 	fmt.Println(chapter)
-	// }
 
 	var chapterList []string
 	chapterList = readDirectoryContents(".", "dir")
@@ -74,7 +31,18 @@ func selectChapter() string {
 	}
 	//Wait for input from user
 	chapterSelectionInput := returnInputFromUser()
-	chapterSelection := chapterList[chapterSelectionInput-1]
+
+	number, err := strconv.Atoi(chapterSelectionInput)
+	if err != nil {
+		// handle error
+		log.Fatalln("strconv.Atoi error")
+	}
+	if number > len(chapterList) {
+		log.Fatalf("Selection %v not recognised.", number)
+	}
+	// fmt.Println("user converted input", number)
+	// chapterSelection := chapterList[(number - 1)]
+	chapterSelection := chapterList[number-1]
 	log.Printf("User has selected chapter %s\n", chapterSelection)
 
 	return chapterSelection
@@ -85,29 +53,29 @@ func selectProgramme(dir string) string {
 	programList = readDirectoryContents(dir, "file")
 	for i := 0; i < len(programList); i++ {
 		program := programList[i]
-		fmt.Printf("%v) %s\n", i+1, program)
+		fmt.Printf("%v) %s/%s\n", i+1, dir, program)
 	}
 	//Wait for input from user
 	programSelectionInput := returnInputFromUser()
-	fmt.Println(programSelectionInput)
-	fmt.Printf("User input: %v\n", programSelectionInput)
-	programSelection := programList[(programSelectionInput - 1)]
-	log.Printf("User has selected program %s\n", programSelection)
-	fmt.Println(dir + "/" + programSelection)
+	// fmt.Println(programSelectionInput)
+	// fmt.Printf("User input: %v\n", programSelectionInput)
+	number, err := strconv.Atoi(programSelectionInput)
+	if err != nil {
+		// handle error
+		log.Fatalln("strconv.Atoi error")
+	}
+	if number > len(programList) {
+		log.Fatalf("Selection %v not recognised.", number)
+	}
+
+	programSelection := programList[number-1]
+	// log.Printf("User has selected program %s\n", programSelection)
+	fmt.Printf("\n%s/%s\n\n", dir, programSelection)
 	// invoke("ch1.Echo1")
 	return programSelection
 }
 
-// func invoke(fn interface{}, args ...string) {
-// 	v := reflect.ValueOf(fn)
-// 	rargs := make([]reflect.Value, len(args))
-// 	for i, a := range args {
-// 		rargs[i] = reflect.ValueOf(a)
-// 	}
-// 	v.Call(rargs)
-// }
-
-func callFunc(programSelection string) {
+func callFunc(programSelection string, a ...interface{}) {
 	switch programSelection {
 	case "echo1.go":
 		ch1.Echo1()
@@ -126,7 +94,7 @@ Function called with input string used to prompt user for a single line input.
 @returns user input
 */
 func returnInputFromUser() string {
-	var i = 0
+	// var i = 0
 	// var i string
 	// scanner := bufio.NewScanner(os.Stdin)
 	// for scanner.Scan() {
@@ -155,12 +123,13 @@ func returnInputFromUser() string {
 	// _, i = binary.Varint(ba)
 	// fmt.Println(i)
 	// return i
-
+	fmt.Print("User Selection: ")
 	reader := bufio.NewReader(os.Stdin)
 	input, _ := reader.ReadString('\n')
-
+	firstInput := string([]byte(input)[0])
+	// log.Println(firstInput)
 	// fmt.Printf("Input Char Is : %v", string([]byte(input)[0]))
-	return input
+	return firstInput
 }
 
 /*
