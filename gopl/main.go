@@ -8,10 +8,29 @@ import (
 	"os"
 	"strconv"
 
+	"runtime"
+
 	"github.com/solf1re2/goLangDev/gopl/ch1"
 )
 
+const (
+	GOOS string = runtime.GOOS
+)
+
+var gopathDir string
+
+func setHomeDir() {
+	// if GOOS == "windows" {
+	gopathDir = os.Getenv("GOPATH")
+	// fmt.Println(gopathDir)
+	// } else {
+
+	// }
+	gopathDir = gopathDir + "\\src\\github.com\\solf1re2\\goLangDev\\gopl"
+}
+
 func main() {
+	setHomeDir()
 	chapter := selectChapter()
 	program := selectProgramme(chapter)
 	callFunc(program)
@@ -21,9 +40,8 @@ func selectChapter() string {
 	//Output a list of "chapters" or "packages" for the user to choose from
 	//TODO Hard code for now --> map in file or scan directories under gopl in future?
 	fmt.Println("Select chapter (enter 1,2,etc)")
-
 	var chapterList []string
-	chapterList = readDirectoryContents(".", "dir")
+	chapterList = readDirectoryContents(gopathDir, "dir")
 
 	for i := 0; i < len(chapterList); i++ {
 		chapter := chapterList[i]
@@ -50,7 +68,7 @@ func selectChapter() string {
 
 func selectProgramme(dir string) string {
 	var programList []string
-	programList = readDirectoryContents(dir, "file")
+	programList = readDirectoryContents(gopathDir+"\\"+dir, "file")
 	for i := 0; i < len(programList); i++ {
 		program := programList[i]
 		fmt.Printf("%v) %s/%s\n", i+1, dir, program)
