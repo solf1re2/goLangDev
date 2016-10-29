@@ -20,77 +20,50 @@ const (
 var gopathDir string
 
 func setHomeDir() {
-	// if GOOS == "windows" {
 	gopathDir = os.Getenv("GOPATH")
 	// fmt.Println(gopathDir)
-	// } else {
-
-	// }
 	gopathDir = gopathDir + "\\src\\github.com\\solf1re2\\goLangDev\\gopl"
 }
 
 func main() {
 	setHomeDir()
-	chapter := selectChapter()
-	program := selectProgramme(chapter)
+	// chapter := selectChapter()
+	chapter := selectFromList("dir", "chapter", "")
+	// program := selectProgramme(chapter)
+	program := selectFromList("file", "program", "\\"+chapter)
 	callFunc(program)
 }
 
-func selectChapter() string {
+func selectFromList(dirOrFile string, promptString string, extraFilePath string) string {
 	//Output a list of "chapters" or "packages" for the user to choose from
 	//TODO Hard code for now --> map in file or scan directories under gopl in future?
-	fmt.Println("Select chapter (enter 1,2,etc)")
-	var chapterList []string
-	chapterList = readDirectoryContents(gopathDir, "dir")
+	fmt.Printf("Select %s (enter 1,2,etc)\n\n", promptString)
 
-	for i := 0; i < len(chapterList); i++ {
-		chapter := chapterList[i]
-		fmt.Printf("%v) %s\n", i+1, chapter)
+	var list []string
+	list = readDirectoryContents(gopathDir+extraFilePath, dirOrFile)
+	// log.Println(list)
+	for i := 0; i < len(list); i++ {
+		listItem := list[i]
+		fmt.Printf("%v) %s\n", i+1, listItem)
 	}
-	//Wait for input from user
-	chapterSelectionInput := returnInputFromUser()
 
-	number, err := strconv.Atoi(chapterSelectionInput)
+	//Wait for input from user
+	listItemSelection := returnInputFromUser()
+
+	number, err := strconv.Atoi(listItemSelection)
 	if err != nil {
 		// handle error
 		log.Fatalln("strconv.Atoi error")
 	}
-	if number > len(chapterList) {
+	if number > len(list) {
 		log.Fatalf("Selection %v not recognised.", number)
 	}
 	// fmt.Println("user converted input", number)
 	// chapterSelection := chapterList[(number - 1)]
-	chapterSelection := chapterList[number-1]
-	log.Printf("User has selected chapter %s\n", chapterSelection)
+	selectedListItem := list[number-1]
+	log.Printf("User has selected %s %s\n", promptString, selectedListItem)
 
-	return chapterSelection
-}
-
-func selectProgramme(dir string) string {
-	var programList []string
-	programList = readDirectoryContents(gopathDir+"\\"+dir, "file")
-	for i := 0; i < len(programList); i++ {
-		program := programList[i]
-		fmt.Printf("%v) %s/%s\n", i+1, dir, program)
-	}
-	//Wait for input from user
-	programSelectionInput := returnInputFromUser()
-	// fmt.Println(programSelectionInput)
-	// fmt.Printf("User input: %v\n", programSelectionInput)
-	number, err := strconv.Atoi(programSelectionInput)
-	if err != nil {
-		// handle error
-		log.Fatalln("strconv.Atoi error")
-	}
-	if number > len(programList) {
-		log.Fatalf("Selection %v not recognised.", number)
-	}
-
-	programSelection := programList[number-1]
-	// log.Printf("User has selected program %s\n", programSelection)
-	fmt.Printf("\n%s/%s\n\n", dir, programSelection)
-	// invoke("ch1.Echo1")
-	return programSelection
+	return selectedListItem
 }
 
 func callFunc(programSelection string, a ...interface{}) {
@@ -112,35 +85,6 @@ Function called with input string used to prompt user for a single line input.
 @returns user input
 */
 func returnInputFromUser() string {
-	// var i = 0
-	// var i string
-	// scanner := bufio.NewScanner(os.Stdin)
-	// for scanner.Scan() {
-	// 	// assign the input to i
-	// 	i = scanner.Text()
-
-	// 	// Check that there is input
-	// 	if len(i) > 0 {
-	// 		break
-	// 	} else {
-	// 	}
-	// }
-	// if err := scanner.Err(); err != nil {
-	// 	log.Print(os.Stderr, "reading standard input:", err)
-	// }
-	// fmt.Printf("\n")
-
-	// return i
-
-	//---------------------------------
-	// reader := bufio.NewReader(os.Stdin)
-	// b, _ := reader.ReadByte()
-	// var ba []byte
-	// ba = nil
-	// ba = append(ba, b)
-	// _, i = binary.Varint(ba)
-	// fmt.Println(i)
-	// return i
 	fmt.Print("User Selection: ")
 	reader := bufio.NewReader(os.Stdin)
 	input, _ := reader.ReadString('\n')
@@ -148,34 +92,6 @@ func returnInputFromUser() string {
 	// log.Println(firstInput)
 	// fmt.Printf("Input Char Is : %v", string([]byte(input)[0]))
 	return firstInput
-}
-
-/*
-Function called with input string used to prompt user for a single line input.
-@promptMessage message to prompt user for input.
-@returns user input
-*/
-func PromptAndReturnInputFromUser(promptMessage string) string {
-	var i string
-	scanner := bufio.NewScanner(os.Stdin)
-	fmt.Println(promptMessage)
-	for scanner.Scan() {
-		// assign the input to i
-		i = scanner.Text()
-
-		// Check that there is input
-		if len(i) > 0 {
-			break
-		} else {
-			fmt.Println(promptMessage)
-		}
-	}
-	if err := scanner.Err(); err != nil {
-		log.Print(os.Stderr, "reading standard input:", err)
-	}
-	fmt.Printf("\n")
-
-	return i
 }
 
 func readDirectoryContents(directory string, fileOrDir string) []string {
