@@ -68,12 +68,18 @@ func selectFromList(dirOrFile string, promptString string, extraFilePath string)
 
 func callFunc(programSelection string, a ...interface{}) {
 	switch programSelection {
+	// ch1 programs
+	case "helloworld.go":
+		ch1.Helloworld()
 	case "echo1.go":
 		ch1.Echo1()
 	case "echo2.go":
 		ch1.Echo2()
-	case "helloworld.go":
-		ch1.Helloworld()
+	case "echo3.go":
+		ch1.Echo3()
+
+		// ch2 programs
+
 	default:
 		fmt.Println("Not Recognised")
 	}
