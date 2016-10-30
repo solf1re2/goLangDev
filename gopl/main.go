@@ -22,7 +22,11 @@ var gopathDir string
 func setHomeDir() {
 	gopathDir = os.Getenv("GOPATH")
 	// fmt.Println(gopathDir)
-	gopathDir = gopathDir + "\\src\\github.com\\solf1re2\\goLangDev\\gopl"
+	if GOOS == "windows" {
+		gopathDir = gopathDir + "\\src\\github.com\\solf1re2\\goLangDev\\gopl\\"
+	} else if GOOS == "linux" {
+		gopathDir = gopathDir + "/src/github.com/solf1re2/goLangDev/gopl/"		
+	}
 }
 
 func main() {
@@ -30,7 +34,7 @@ func main() {
 	// chapter := selectChapter()
 	chapter := selectFromList("dir", "chapter", "")
 	// program := selectProgramme(chapter)
-	program := selectFromList("file", "program", "\\"+chapter)
+	program := selectFromList("file", "program", chapter)
 	callFunc(program)
 }
 
