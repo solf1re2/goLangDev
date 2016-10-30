@@ -77,7 +77,8 @@ func callFunc(programSelection string, a ...interface{}) {
 		ch1.Echo2()
 	case "echo3.go":
 		ch1.Echo3()
-
+	case "dup.go":
+		ch1.Dup()
 		// ch2 programs
 
 	default:
