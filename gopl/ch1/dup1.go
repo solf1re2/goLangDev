@@ -1,5 +1,5 @@
 package ch1
 
-func Dup() {
+func Dup1() {
 
 }

@@ -25,7 +25,7 @@ func setHomeDir() {
 	if GOOS == "windows" {
 		gopathDir = gopathDir + "\\src\\github.com\\solf1re2\\goLangDev\\gopl\\"
 	} else if GOOS == "linux" {
-		gopathDir = gopathDir + "/src/github.com/solf1re2/goLangDev/gopl/"		
+		gopathDir = gopathDir + "/src/github.com/solf1re2/goLangDev/gopl/"
 	}
 }
 
@@ -81,8 +81,8 @@ func callFunc(programSelection string, a ...interface{}) {
 		ch1.Echo2()
 	case "echo3.go":
 		ch1.Echo3()
-	case "dup.go":
-		ch1.Dup()
+	case "dup1.go":
+		ch1.Dup1()
 		// ch2 programs
 
 	default:
