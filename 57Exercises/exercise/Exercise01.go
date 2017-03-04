@@ -1,16 +1,16 @@
-package main
+package exercise
 
 import "fmt"
 
-func exerciseTwo() {
+func ExerciseOne() {
 	var i = ""
 	prompt := "Hello, what is your name? "
-	i = promptAndReturnInputFromUser(prompt)
-
-	fmt.Println(i, "has", len(i), "characters")
+	// i = getInput()
+	i = PromptAndReturnInputFromUser(prompt)
+	fmt.Println("Hello", i, "nice to meet you")
 }
 
-// func getInput2() string {
+// func getInput() string {
 // 	var i string
 // 	_, err := fmt.Scanf("%s", &i)
 
@@ -20,7 +20,7 @@ func exerciseTwo() {
 // 	}
 // 	if len(i) == 0 {
 // 		fmt.Println("You must enter a name.")
-// 		return getInput2()
+// 		return getInput()
 // 	}
 // 	return i
 // }

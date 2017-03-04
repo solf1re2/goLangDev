@@ -1,14 +1,14 @@
-package main
+package exercise
 
 import "fmt"
 
-func exerciseThree() {
+func ExerciseThree() {
 	//var quoteString = ""
 	//fmt.Print("Hello, what is your name? ")
 	promptForQuote := "What is the Quote? "
 	promptForAuthor := "Who said it? "
-	quoteString := promptAndReturnInputFromUser(promptForQuote)
-	authorString := promptAndReturnInputFromUser(promptForAuthor)
+	quoteString := PromptAndReturnInputFromUser(promptForQuote)
+	authorString := PromptAndReturnInputFromUser(promptForAuthor)
 
 	fmt.Println(authorString, "says,  \"", quoteString, "\"")
 }

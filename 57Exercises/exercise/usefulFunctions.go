@@ -1,4 +1,4 @@
-package main
+package exercise
 
 import (
 	"bufio"
@@ -12,7 +12,7 @@ Function called with input string used to prompt user for a single line input.
 @promptMessage message to prompt user for input.
 @returns user input
 */
-func promptAndReturnInputFromUser(promptMessage string) string {
+func PromptAndReturnInputFromUser(promptMessage string) string {
 	var i string
 	scanner := bufio.NewScanner(os.Stdin)
 	fmt.Println(promptMessage)
